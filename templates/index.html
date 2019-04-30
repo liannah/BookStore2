@@ -1,0 +1,39 @@
+<html>
+</head>
+  <body>
+    <h1>Add author</h1>
+    <form method="POST" action="/authors">
+        <input type="text" name="last_name">
+        <input type="text" name="first_name">
+        <input type="submit" value="Add">
+    </form>
+
+    <h1>Authors</h1>
+    <table>
+            {% for author in authors %}
+        <tr>
+            <td>
+            {{author.last_name}} {{author.first_name}}
+            </td>
+            <td>
+                <form method="POST" action="/authors/update">
+                    <input type="hidden" value="{{author.first_name}}" name="oldfirst_name">
+                    <input type="hidden" value="{{author.last_name}}" name="oldlast_name">
+                    <input type="text" value="{{author.last_name}}" name="newlast_name">
+                    <input type="text" value="{{author.first_name}}" name="newfirst_name">
+                    <input type="submit" value="Update">
+                </form>
+            </td>
+            <td>
+                <form method="POST" action="/authors/delete">
+                    <input type="hidden" value="{{author.first_name}}" name="first_name">
+                    <input type="hidden" value="{{author.last_name}}" name="last_name">
+                    <input type="submit" value="Delete">
+                </form>
+            </td>
+        </tr>
+{% endfor %}
+
+    </table>
+  </body>
+</html>
